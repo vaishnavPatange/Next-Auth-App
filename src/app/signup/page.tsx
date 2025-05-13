@@ -21,10 +21,14 @@ const SignupPage = () => {
     try {
       setLoading(true);
       const response: any = await axios.post("/api/users/signup", user);
-      if(response.success){
+      if(response.data.success){
         toast.success("Signed up successfully");
-      }
-      router.push("/login");
+        router.push("/login");
+      } else{
+        console.log(response.data.message);
+        toast.error(response.data.message);
+      } 
+      
     } catch (error: any) {
       console.log(error.message);
       toast.error(error.message);
@@ -74,10 +78,11 @@ const SignupPage = () => {
             placeholder="password"
             />
           <button 
-            className="p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600"
+            className={`p-2 border  ${isDisabled ? "opacity-35" : ""} border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600`}
             onClick={onSignup}
+            disabled = {isDisabled}
           >
-            {isDisabled ? "please enter fields" : "Signup here"}
+             Signup here
           </button>  
           <Link href="/login">Visit Login page</Link>
         </div>

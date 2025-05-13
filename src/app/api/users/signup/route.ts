@@ -13,14 +13,16 @@ export async function POST(request: NextRequest){
 
     if(!username || !email || !password){
       return NextResponse.json({
-        message: "All fields are neccessary"
+        message: "All fields are neccessary",
+        success: false
       })
     }
 
     const user = await User.findOne({email});
     if(user){
       return NextResponse.json({
-        message: "User already exists. Please try singing in"
+        message: "User already exists",
+        success: false
       })
     }
 
