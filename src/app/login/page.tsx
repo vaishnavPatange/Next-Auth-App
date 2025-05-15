@@ -17,12 +17,11 @@ const LoginPage = () => {
   const onLogin = async () => {
     try {
       setLoading(true);
-      const response = await axios.post("/api/users/login", user);
+      const response = await axios.post("/api/users/login", user, {withCredentials: true});
       if(response.data.success){
         toast.success(response.data.message);
-        setTimeout(() => {
-          router.push("/profile")
-        }, 1500)
+        console.log(response.data);
+        router.push("/profile")
       }
     } catch (error:any) {
       toast.error(error.message)
