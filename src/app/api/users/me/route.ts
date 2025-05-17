@@ -5,10 +5,12 @@ import { getDataFromToken } from "@/helper/getDataFromToken";
 export async function GET(request: NextRequest){
   try {
     const userId = await getDataFromToken(request);
-    const user = await User.findById(userId).select("-password -isAdmin -_id");
+    const user = await User.findById(userId).select("-password -isAdmin");
+    console.log(user);
     return NextResponse.json({
       message: "User found",
-      user
+      success: true,
+      data: user._id
     })
 
   } catch (error: any) {

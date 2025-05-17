@@ -1,7 +1,10 @@
-const UserProfile = ({params}: any) => {
+const UserProfile = async ({params}:any) => {
+
+  const {id} = await params;
+
   return (
-    <div>
-      <h1>user profile: {params.id}</h1>
+    <div className="flex justify-center min-h-screen items-center">
+      <h1 className="text-4xl">user id: {id}</h1>
     </div>
   )
 }

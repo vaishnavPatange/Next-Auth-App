@@ -4,14 +4,13 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { NextRequest, NextResponse } from "next/server";
 
+connect();
 
 export async function POST(request: NextRequest) {
   try {
     const reqBody = await request.json();
     const { email, password } = reqBody;
-    console.log(reqBody)
     const user = await User.findOne({ email });
-    console.log(user)
     if (!user) {
       return NextResponse.json({
         message: "User doesn't exists",
@@ -35,7 +34,7 @@ export async function POST(request: NextRequest) {
 
     console.log(tokenData)
 
-    const token = await jwt.sign(tokenData, process.env.TOKEN_SECRET!, { expiresIn: "1h" });
+    const token = await jwt.sign(tokenData, process.env.TOKEN_SECRET!, { expiresIn: "1d" });
 
     console.log(token)
 
@@ -48,8 +47,6 @@ export async function POST(request: NextRequest) {
     response.cookies.set("token", token, {
       httpOnly: true,
       path: "/",
-      sameSite: "lax",
-      secure: false,
     });
 
     return response;
