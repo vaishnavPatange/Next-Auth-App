@@ -5,7 +5,7 @@ import toast, {Toaster} from "react-hot-toast";
 import React, {useEffect, useState} from "react";
 
 const ProfilePage = () => {
-  const [data, setData] = useState<any>(null);
+  const [data, setData] = useState<{ email: string; _id: string } | null>(null);
   const router = useRouter();
   const logout = async() => {
     try {
@@ -23,16 +23,17 @@ const ProfilePage = () => {
   const getUserData = async() => {
     const response = await axios.get("/api/users/me");
     if(response.data.success){
-      console.log(response.data.user);
       setData(response.data.user);
     }
   }
 
   const forgotPass = async() => {
     try {
-      await axios.post("/api/users/forgotmail", {email: data.email, userId: data._id});
-    } catch (error: any) {
-      toast.error(error.message);
+      await axios.post("/api/users/forgotmail", {email: data?.email, userId: data?._id});
+    } catch (error: unknown) {
+      if(error instanceof Error){
+        toast.error(error.message);
+      }
     }
   }
 

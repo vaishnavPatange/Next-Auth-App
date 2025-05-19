@@ -2,7 +2,7 @@ import nodemailer from "nodemailer";
 import User from "@/models/userModel";
 import { v4 as uuidv4 } from "uuid";
 
-export const sendEmail = async ({ email, emailType, userId }: any) => {
+export const sendEmail = async ({ email, emailType, userId } : {email: string, emailType: string, userId: string}) => {
   try {
     const token = uuidv4();
 

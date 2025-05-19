@@ -15,36 +15,41 @@ const ForgotPasswordPage = () => {
     try {
       const token = window.location.search.split("=")[1];
       console.log(token);
-      const response = await axios.post("/api/users/resetpassword", {token});
+      const response = await axios.post("/api/users/resetpassword", { token });
       if (response.data.success) {
         setIsVerified(true);
         setUserId(response.data.userId);
       } else {
         toast.error(response.data.message);
       }
-    }  catch (error:unknown) {
-      if(error instanceof Error){
+    } catch (error: unknown) {
+      if (error instanceof Error) {
         toast.error(error.message)
       }
     }
   }
 
-  const resetPassword = async(e: any) =>{
+  const resetPassword = async (e: unknown) => {
     try {
-      e.preventDefault();
-      if(password !== passwordCopy){
+      if (e instanceof Event) {
+        e.preventDefault();
+      }
+      if (password !== passwordCopy) {
         toast.error("Password does not mathch");
-      } else{
-        const res = await axios.put("/api/users/resetpass", {newPassword : password, userId})
-        if(res.data.success){
+      } else {
+        const res = await axios.put("/api/users/resetpass", { newPassword: password, userId })
+        if (res.data.success) {
           toast.success(res.data.message);
           toast.success("Please login again");
           await axios.get("/api/users/logout");
           router.push("/login");
         }
       }
-    } catch (error: any) {
-      toast.error(error.message);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        toast.error(error.message);
+      }
+
     }
   }
 
@@ -77,7 +82,7 @@ const ForgotPasswordPage = () => {
         </form>
       </div>
 
-      : <Toaster/>
+      : <Toaster />
   )
 
 }

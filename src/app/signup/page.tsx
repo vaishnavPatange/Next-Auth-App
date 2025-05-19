@@ -20,7 +20,7 @@ const SignupPage = () => {
   const onSignup = async () => {
     try {
       setLoading(true);
-      const response: any = await axios.post("/api/users/signup", user);
+      const response = await axios.post("/api/users/signup", user);
       if(response.data.success){
         toast.success("Signed up successfully");
         router.push("/login");
