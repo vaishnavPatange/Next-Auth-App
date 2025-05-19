@@ -19,7 +19,7 @@ const ProfilePage = () => {
         toast.error(error.message)
       }
   }
-
+  }
   const getUserData = async() => {
     const response = await axios.get("/api/users/me");
     if(response.data.success){
@@ -61,6 +61,6 @@ const ProfilePage = () => {
     </div>
   )
 }
-}
+
 
 export default ProfilePage

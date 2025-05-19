@@ -13,7 +13,9 @@ export async function connect(){
       console.log("Error in connecting with MongoDB, please make sure your mongoDB is running" + error)
     });
 
-  } catch (error) {
-    console.log("Something went wrong");
+  } catch (error: unknown) {
+    if(error instanceof Error){
+      console.log("Something went wrong", error.message);
+    }
   }
 }
