@@ -26,6 +26,7 @@ const ForgotPasswordPage = () => {
       if(error instanceof Error){
         toast.error(error.message)
       }
+    }
   }
 
   const resetPassword = async(e: any) =>{
