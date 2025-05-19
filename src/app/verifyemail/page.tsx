@@ -17,9 +17,10 @@ export default function VerifyEmail() {
         setError(true);
         console.log(response.data.message);
       }
-    } catch (error: any) {
-      setError(true);
-      console.log(error.message);
+    } catch (error: unknown) {
+      if(error instanceof Error){
+        setError(true);
+      } 
     }
   };
 

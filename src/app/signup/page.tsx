@@ -29,9 +29,10 @@ const SignupPage = () => {
         toast.error(response.data.message);
       } 
       
-    } catch (error: any) {
-      console.log(error.message);
-      toast.error(error.message);
+    } catch (error: unknown) {
+      if(error instanceof Error){
+         toast.error(error.message);
+      }
     } finally{
       setLoading(false);
     }

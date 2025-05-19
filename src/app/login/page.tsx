@@ -23,8 +23,10 @@ const LoginPage = () => {
         console.log(response.data);
         router.push("/profile")
       }
-    } catch (error:any) {
-      toast.error(error.message)
+    } catch (error:unknown) {
+      if(error instanceof Error){
+        toast.error(error.message)
+      }
     } finally{
       setLoading(false);
     }

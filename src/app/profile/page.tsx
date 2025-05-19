@@ -2,7 +2,6 @@
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import toast, {Toaster} from "react-hot-toast";
-import Link from "next/link";
 import React, {useEffect, useState} from "react";
 
 const ProfilePage = () => {
@@ -15,9 +14,10 @@ const ProfilePage = () => {
         toast.success(response.data.message);
         router.push("/login");
       }
-    } catch (error:any) {
-      toast.error(error.message)
-    }
+    }  catch (error:unknown) {
+      if(error instanceof Error){
+        toast.error(error.message)
+      }
   }
 
   const getUserData = async() => {

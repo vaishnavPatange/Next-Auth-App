@@ -22,10 +22,10 @@ const ForgotPasswordPage = () => {
       } else {
         toast.error(response.data.message);
       }
-    } catch (error: any) {
-      toast.error(error.message)
-      console.log(error);
-    }
+    }  catch (error:unknown) {
+      if(error instanceof Error){
+        toast.error(error.message)
+      }
   }
 
   const resetPassword = async(e: any) =>{

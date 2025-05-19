@@ -31,11 +31,12 @@ export async function POST(request: NextRequest){
       userId: user._id
     });
 
-  } catch (error: any) {
-    console.log(error.message);
-    return NextResponse.json({
+  } catch (error: unknown) {
+    if(error instanceof Error){
+      return NextResponse.json({
       message: error.message,
       success: false
     })
+    }
   }
 }
