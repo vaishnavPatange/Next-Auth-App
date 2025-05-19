@@ -1,6 +1,6 @@
 type userProfile = {
   params: {
-    id: String
+    id: string
   }
 }
 
