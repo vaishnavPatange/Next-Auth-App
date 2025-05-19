@@ -10,7 +10,7 @@ export async function GET(request: NextRequest){
     return NextResponse.json({
       message: "User found",
       success: true,
-      data: user._id
+      user
     })
 
   } catch (error: any) {

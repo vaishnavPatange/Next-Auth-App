@@ -16,10 +16,16 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
         { new: true }
       );
     } else if (emailType === "RESET") {
-      await User.findByIdAndUpdate(userId, {
+       await User.findByIdAndUpdate(userId, {
         forgotPasswordToken: token,
-        forgotPasswordTokenExpiry: Date.now() + 1000 * 60 * 30,
       });
+
+      const user = await User.findByIdAndUpdate(userId, {
+        forgotPasswordTokenExpiry: Date.now() + 10000 * 60 * 30
+      }, {new: true});
+
+      
+      console.log(user);
     }
 
     const transport = nodemailer.createTransport({
