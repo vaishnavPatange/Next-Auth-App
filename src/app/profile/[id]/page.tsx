@@ -1,10 +1,10 @@
-type userProfile = {
+type PageProps = {
   params: {
     id: string
   }
 }
 
-const UserProfile = async ({params}: userProfile) => {
+const UserProfile = async ({params}: PageProps) => {
       const {id} = params;
   return (
     <div className="flex justify-center min-h-screen items-center">
